@@ -1,0 +1,5 @@
+name = Dont Click Me
+description = A Simulated wsod®
+package = Epicodus Examples
+core = 7.x
+files[] = dont_click_me.module
