@@ -6,11 +6,11 @@ function dont_click_me_menu() {
     'title' => 'DO NOT CLICK',
     'page callback' => 'display_wsod',
     'access callback' => TRUE,
-    'type' => MENU_NORMAL_ITEM,
+    'type' => MENU_CALLBACK,
   );
   return $items;
 }
 
 function display_wsod() {
-  return '';
+  
 }
