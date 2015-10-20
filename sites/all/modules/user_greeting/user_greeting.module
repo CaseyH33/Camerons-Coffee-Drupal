@@ -1,0 +1,67 @@
+<?php
+function user_greeting_menu(){
+  $items = array();
+  $items['user_login_greeting'] = array(
+    'title' => 'Login!',
+    'page callback' => 'user_logged_in',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin_logout_greeting'] = array(
+    'title' => 'Logout!',
+    'page callback' => 'admin_logged_out',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  $items['mod_logout_greeting'] = array(
+    'title' => 'Logout!',
+    'page callback' => 'mod_logged_out',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  $items['user_logout_greeting'] = array(
+    'title' => 'Logout!',
+    'page callback' => 'user_logged_out',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function user_logged_in() {
+  global $user;
+  if(in_array('administrator', $user->roles)) {
+    return '<p>Welcome to the Admin view!</p>';
+  } elseif(in_array('moderator', $user->roles)) {
+    return '<p>Time to moderate!</p>';
+  } else {
+    return '<p>Nice to see you!</p>';
+  }
+}
+
+function admin_logged_out() {
+  return '<p>Bye bye bye!</p>';
+}
+
+function mod_logged_out() {
+  return "<p>We're moderately sad to see you go!</p>";
+}
+
+function user_logged_out() {
+  return '<p>Come back soon!</p>';
+}
+
+function user_greeting_user_login() {
+  $_GET['destination'] = 'user_login_greeting';
+}
+
+function user_greeting_user_logout() {
+  global $user;
+  if(in_array('administrator', $user->roles)) {
+    $_GET['destination'] = 'admin_logout_greeting';
+  } elseif(in_array('moderator', $user->roles)) {
+    $_GET['destination'] = 'mod_logout_greeting';
+  } else {
+    $_GET['destination'] = 'user_logout_greeting';
+  }
+}
